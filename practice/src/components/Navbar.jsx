@@ -2,25 +2,20 @@
 
 export default function Navbar(props) {
   return (
-    <nav className="w-full bg-white border-b">
+    <nav
+      className={`w-full border-b transition-colors duration-300 
+      ${props.mode ? "bg-gray-900 text-gray-100" : "bg-white text-gray-900"}`}
+    >
       <div className="max-w-7xl mx-auto px-4">
         <div className="flex items-center justify-between h-14">
           <div className="flex items-center space-x-6">
-            <a href="#" className="text-lg font-semibold text-gray-800">
+            <a href="#" className="text-lg font-semibold ">
               {props.title}
             </a>
-
-            <a
-              href="#"
-              className="text-gray-600 hover:text-gray-900 text-sm font-medium"
-            >
+            <a href="#" className="text-sm font-medium">
               Home
             </a>
-
-            <a
-              href="#"
-              className="text-gray-600 hover:text-gray-900 text-sm font-medium"
-            >
+            <a href="#" className=" hover:text-gray-900 text-sm font-medium">
               {props.about}
             </a>
           </div>
@@ -36,6 +31,17 @@ export default function Navbar(props) {
               Search
             </button>
           </div>
+          {/* Dark mode switch */}
+          <label className="relative inline-flex items-center cursor-pointer">
+            <input
+              type="checkbox"
+              className="sr-only peer"
+              checked={props.mode}
+              onChange={props.toggleMode}
+            />
+            <div className="w-11 h-6 bg-gray-300 rounded-full peer peer-checked:bg-blue-600"></div>
+            <div className="absolute left-1 top-1 w-4 h-4 bg-white rounded-full transition-transform peer-checked:translate-x-5"></div>
+          </label>
         </div>
       </div>
     </nav>
