@@ -1,6 +1,7 @@
 import './App.css';
 import Navbar from "./components/Navbar.jsx";
 import TextForm from "./components/TextForm.jsx";
+// import About from "./components/About.jsx";
 
 function App() {
   return (
@@ -10,6 +11,7 @@ function App() {
        {/* <Navbar/> */}
        <div>
         <TextForm heading="Enter the text to analyze"/>
+        {/* <About/> */}
        </div>
     </>
   );
