@@ -1,8 +1,6 @@
-
 import React, { useState } from "react";
 
 export default function TextForm(props) {
-
   const handleUpClick = () => {
     // console.log("Uppercase was clicked"+ text);
     let newText = text.toUpperCase();
@@ -13,80 +11,90 @@ export default function TextForm(props) {
     setText(event.target.value);
   };
 
-  const handleLowClick =()=>{
+  const handleLowClick = () => {
     setText(text.toLowerCase());
-  }
-  const handleClearClick =()=>{
-    let newText =" ";
-    setText(newText)
-  }
-  
-  const handleCopyClick=()=>{
+  };
+  const handleClearClick = () => {
+    let newText = " ";
+    setText(newText);
+  };
+
+  const handleCopyClick = () => {
     navigator.clipboard.writeText(text);
-    alert("Text copied to clipboard!")
-  }
-  const handleExtraSpaces=()=>{
+    alert("Text copied to clipboard!");
+  };
+  const handleExtraSpaces = () => {
     let newText = text.split(/[ ]+/);
-    setText(newText.join(" "))
-  }
+    setText(newText.join(" "));
+  };
 
   const [text, setText] = useState("");
- 
+
   // text= "new text";//wrong way to change the state
   // setText("new text");//correct way to change the state
   return (
     <>
-    <div className="container">
-      <h1 className="text-3xl font-semibold mt-6 text-center">{props.heading} </h1>
-      <div className="max-w-xl mx-auto mt-10 ">
-        <label htmlFor="myBox" className="form-label"></label>
-        <textarea
-          className="w-full h-40 border p-3 rounded"
-          value={text}
-          onChange={handleOnChange}
-        ></textarea>
+      <div className="container" style={{
+              backgroundColor: props.mode === "dark" ? "" : "white",
+              color: props.mode === "dark" ? "#f9fafb" : "black",
+            }}>
+        <h1 className="text-3xl font-semibold mt-6 text-center">
+          {props.heading}{" "}
+        </h1>
+        <div className="max-w-xl mx-auto mt-10 ">
+          <label htmlFor="myBox" className="form-label"></label>
+          <textarea
+            className="w-full h-40 border p-3 rounded"
+            value={text}
+            onChange={handleOnChange}
+            style={{
+              backgroundColor: props.mode === "dark" ? "#374151" : "white",
+              color: props.mode === "dark" ? "#f9fafb" : "black",
+            }}
+          ></textarea>
 
-        <div className="mt-4 gap-4 flex justify-center">
-          <button
-            className="mt-3 bg-blue-600 text-white px-4 py-2 rounded"
-            onClick={handleUpClick}
-          >
-            convert to UpperCase
-          </button>
-          <button 
-          className="mt-3 bg-blue-600 text-white px-4 py-2 rounded"
-          onClick={handleLowClick}
-          >
-            convert to LowerCase
-          </button>
-          <button 
-          className="mt-3 bg-blue-600 text-white px-4 py-2 rounded"
-          onClick={handleClearClick}
-          >
-           Clear Text
-          </button>
-          <button 
-          className="mt-3 bg-blue-600 text-white px-4 py-2 rounded"
-          onClick={handleCopyClick}
-          >
-           Copy
-          </button>
-          <button 
-          className="mt-3 bg-blue-600 text-white px-4 py-2 rounded"
-          onClick={handleExtraSpaces}
-          >
-           Remove Extra Space
-          </button>
-          
+          <div className="mt-4 gap-4 flex justify-center">
+            <button
+              className="mt-3 bg-green-800 text-white px-4 py-2 rounded"
+              onClick={handleUpClick}
+            >
+              convert to UpperCase
+            </button>
+            <button
+              className="mt-3 bg-green-800 text-white px-4 py-2 rounded"
+              onClick={handleLowClick}
+            >
+              convert to LowerCase
+            </button>
+            <button
+              className="mt-3 bg-green-800 text-white px-4 py-2 rounded"
+              onClick={handleClearClick}
+            >
+              Clear Text
+            </button>
+            <button
+              className="mt-3 bg-green-800 text-white px-4 py-2 rounded"
+              onClick={handleCopyClick}
+            >
+              Copy
+            </button>
+            <button
+              className="mt-3 bg-green-800 text-white px-4 py-2 rounded"
+              onClick={handleExtraSpaces}
+            >
+              Remove Extra Space
+            </button>
+          </div>
         </div>
-      </div>
-      <div className="cointainer my-2 mx-8 text-center">
-        <h1 className="text-3xl font-semibold mt-6 "> Your text summary</h1>
-        <p>{text.split(" ").length} words and {text.length} characters</p>
-        <p>{0.008*text.split(" ").length} Minutes read</p>
-        <h2>Preview</h2>
-        <p>{text}</p>
-      </div>
+        <div className="cointainer my-2 mx-26">
+          <h1 className="text-3xl font-semibold mt-6 "> Your text summary</h1>
+          <p>
+            {text.split(" ").length} words and {text.length} characters
+          </p>
+          <p>{0.008 * text.split(" ").length} Minutes read</p>
+          <h2 className="text-2xl font-semibold my-6">Preview</h2>
+          <p>{text.length>0?text: "Enter something to preview it here"}</p>
+        </div>
       </div>
     </>
   );
