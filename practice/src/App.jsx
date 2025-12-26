@@ -6,15 +6,25 @@ import Alert from "./components/Alert.jsx";
 
 function App() {
   const [mode, setMode] = useState("light");
-  const [showAlert, setShowAlert] = useState(true);
+  const [alertMsg, setAlertMsg] = useState("");
+  const [showAlert, setShowAlert] = useState(false);
+
+  // 🔔 Central alert handler (used everywhere)
+  const showAlertMessage = (message) => {
+    setAlertMsg(message);
+    setShowAlert(true);
+    setTimeout(() => setShowAlert(false), 1500);
+  };
 
   const toggleMode = () => {
     if (mode === "light") {
       setMode("dark");
       document.body.style.backgroundColor = "#121212";
+      showAlertMessage("Dark mode has been enabled");
     } else {
       setMode("light");
       document.body.style.backgroundColor = "white";
+      showAlertMessage("Light mode has been enabled");
     }
   };
 
@@ -24,14 +34,16 @@ function App() {
 
       {showAlert && (
         <Alert
-          alert="Text converted successfully!"
+          alert={alertMsg}
           onClose={() => setShowAlert(false)}
         />
       )}
 
-      <div>
-        <TextForm heading="Enter the text to analyze" mode={mode} />
-      </div>
+      <TextForm
+        heading="Enter the text to analyze"
+        mode={mode}
+        showAlert={showAlertMessage}
+      />
     </>
   );
 }
