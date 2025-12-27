@@ -1,7 +1,9 @@
 import { useState } from "react";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "./App.css";
 import Navbar from "./components/Navbar.jsx";
 import TextForm from "./components/TextForm.jsx";
+import About from "./components/About.jsx";
 import Alert from "./components/Alert.jsx";
 
 function App() {
@@ -29,22 +31,27 @@ function App() {
   };
 
   return (
-    <>
+    <BrowserRouter>
       <Navbar title="TextUtils" mode={mode} toggleMode={toggleMode} />
 
       {showAlert && (
-        <Alert
-          alert={alertMsg}
-          onClose={() => setShowAlert(false)}
-        />
+        <Alert alert={alertMsg} onClose={() => setShowAlert(false)} />
       )}
 
-      <TextForm
-        heading="Enter the text to analyze"
-        mode={mode}
-        showAlert={showAlertMessage}
-      />
-    </>
+      <Routes>
+        <Route
+          path="/"
+          element={
+            <TextForm
+              heading="Enter the text to analyze"
+              mode={mode}
+              showAlert={showAlertMessage}
+            />
+          }
+        />
+        <Route path="/about" element={<About />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
 

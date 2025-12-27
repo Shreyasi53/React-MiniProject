@@ -1,25 +1,33 @@
+import { Link } from "react-router-dom";
+
 export default function Navbar(props) {
   return (
     <nav
       className={`w-full border-b transition-colors duration-300 
-      ${props.mode === "dark"
-        ? "bg-gray-900 text-gray-100"
-        : "bg-white text-gray-900"}`}
+      ${
+        props.mode === "dark"
+          ? "bg-gray-900 text-gray-100"
+          : "bg-white text-gray-900"
+      }`}
     >
       <div className="max-w-7xl mx-auto px-4">
         <div className="flex items-center justify-between h-14">
+          {/* LEFT SIDE */}
           <div className="flex items-center space-x-6">
-            <a href="#" className="text-lg font-semibold">
+            <span className="text-lg font-semibold">
               {props.title}
-            </a>
-            <a href="#" className="text-sm font-medium">
+            </span>
+
+            <Link to="/" className="text-sm font-medium hover:underline">
               Home
-            </a>
-            <a href="#" className="hover:text-gray-900 text-sm font-medium">
-              {props.about}
-            </a>
+            </Link>
+
+            <Link to="/about" className="text-sm font-medium hover:underline">
+              About
+            </Link>
           </div>
 
+          {/* SEARCH */}
           <div className="flex items-center space-x-2">
             <input
               type="text"
@@ -31,7 +39,7 @@ export default function Navbar(props) {
             </button>
           </div>
 
-          {/* Dark mode switch */}
+          {/* DARK MODE TOGGLE */}
           <label className="relative inline-flex items-center cursor-pointer">
             <input
               type="checkbox"
